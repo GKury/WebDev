@@ -1,0 +1,1 @@
+Minha primeira página com HTML e CSS. Uma simples página de um currículo genérico. O design/layout não é meu.
