@@ -1,0 +1,58 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Criar conta ou Entrar</h1>
+      <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
+
+      <%- include('includes/messages'); %>
+
+      <div class="row">
+
+        <div class="col-lg">
+          <h4>Criar conta</h4>
+          <p>Caso não possua conta, preencha o formulário abaixo</p>
+          <form action="/login/register", method="post">
+            <input type="hidden" name="_csrf" value = <%= csrfToken %> >
+            <div class="form-group">
+              <label for="emailCriarConta">Email</label>
+              <input type="email" class="form-control" name="email" id="emailCriarConta" placeholder="meuemail@email.com">
+            </div>
+            <div class="form-group">
+              <label for="senhaCriarConta">Senha</label>
+              <input type="password" class="form-control" name="password" id="senhaCriarConta" placeholder="Insira sua senha">
+            </div>
+            <button type="submit" class="btn btn-primary">Criar conta</button>
+          </form>
+        </div>
+
+        <div class="col-lg">
+          <h4>Fazer login</h4>
+          <p>Caso já possua conta, preencha o formulário abaixo</p>
+          <form action="/login/login", method="post">
+            <input type="hidden" name="_csrf" value = <%= csrfToken %> >
+            <div class="form-group">
+              <label for="emailLogar">Email</label>
+              <input type="email" class="form-control" name="email" id="emailLogar" placeholder="meuemail@email.com">
+            </div>
+            <div class="form-group">
+              <label for="senhaLogar">Senha</label>
+              <input type="password" class="form-control" name="password" id="senhaLogar" placeholder="Insira sua senha">
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
