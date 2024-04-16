@@ -1,6 +1,6 @@
 # Projeto agenda pública
 
-## Descrição: 
+## Descrição 
 Este é meu primeiro projeto de Javascript. É uma agenda pública na qual você pode criar uma conta que ficará salva em um banco de dados, logar nela, e realizar as quatro operações básicas CRUD para gerenciar a agenda.
 
 ## Tecnologias Utilizadas
