@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protcolo QG</title>
+
+    <style>
+        p {
+            font-family: Verdana, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+<body style="background-color: #cddffd;" onLoad="document.fmail.txtaluno.focus()">
+    <div align="center">
+        <br>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Protocolo - QUALIFICA GUARULHOS</strong></font> 
+        <br>
+      </h1>
+    </div>
+    <form name="fmail">
+      <table width="400" border="0" cellspacing="5" cellpadding="5" align="center">
+        <tr> 
+          <td width="79"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Beneficiado</strong></font></td>
+          <td width="301"><input name="txtaluno" type="text" size="50"></td>
+        </tr>
+        <tr> 
+          <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Protocolo</strong></font></td>
+          <td><input type="text" name="txtproto"></td>
+        </tr>
+        <tr> 
+          <td colspan="2"><div align="center"> 
+              <input type="button" onClick="criaDoc()" value="Gerar Protocolo">
+            </div></td>
+        </tr>
+      </table>
+    </form>
+    
+    </body>
+
+    <script>
+    function imprimeJanela() {
+    var botaoImprimir = document.querySelector("button[onclick='imprimeJanela()']");
+    
+    // Esconde o botão
+    botaoImprimir.style.visibility = 'hidden';
+    
+    // Aguarda um pequeno intervalo para garantir que o estilo seja aplicado
+    setTimeout(function() {
+        // Chama a função de impressão
+        window.print();
+
+        // Restaura a visibilidade do botão após a impressão
+        botaoImprimir.style.visibility = 'visible';
+    }, 100);
+  }
+
+        function criaDoc() {
+            aluno = document.fmail.txtaluno.value
+            proto = document.fmail.txtproto.value
+            
+            minha_data = new Date()
+                
+            semana = new Array()
+            semana[0] = "domingo"
+            semana[1] = "segunda-feira"
+            semana[2] = "terça-feira"
+            semana[3] = "quarta-feira"
+            semana[4] = "quinta-feira"
+            semana[5] = "sexta-feira"
+            semana[6] = "sábado"
+            
+            mes = new Array()
+            mes[1] = "Janeiro"
+            mes[2] = "Fevereiro"
+            mes[3] = "Março"
+            mes[4] = "Abril"
+            mes[5] = "Maio"
+            mes[6] = "Junho"
+            mes[7] = "Julho"
+            mes[8] = "Agosto"
+            mes[9] = "Setembro"
+            mes[10] = "Outubro"
+            mes[11] = "Novembro"
+            mes[12] = "Dezembro"
+            
+            datacompleta = semana[minha_data.getDay()] + ", " + (minha_data.getDate() < 10 ? "0" : "") + minha_data.getDate() + " de " + mes[minha_data.getMonth() + 1] + " de " + minha_data.getFullYear() + " " + (minha_data.getHours() < 10 ? "0" : "") + minha_data.getHours() + ":" + (minha_data.getMinutes() < 10 ? "0" : "") + minha_data.getMinutes() + ":" + (minha_data.getSeconds() < 10 ? "0" : "") + minha_data.getSeconds()
+
+
+            document.write("<button onclick='imprimeJanela()'>Imprimir</button>")
+            document.write("<main style='width:800px; margin:auto; font-family:Verdana; font-size:12px; font-weight:bold'>")
+                document.write("<p style='text-align:center; font-family:Verdana; font-size:16px'>BENEFICIADO: " + aluno + "</p>")
+                document.write("<p style='text-align:center; font-family: Verdana; font-size:16px'>SÉRIE: " + proto + "</p>")
+
+                document.write("<div style='display:flex; flex-direction=row; width: 100%; flex-content:center; margin:auto'>")
+                    document.write("<div style='flex-grow:1; font-weight:400'>")
+                        document.write("<table>")
+
+                            document.write("<tr>")
+                            document.write("<td>Assunto:</td>")
+                            document.write("<td>Liberação do Benefício Educativo</td>")
+                            document.write("</tr>")
+
+                            document.write("<tr>")
+                            document.write("<td>Para:</td>")
+                            document.write("<td>Central@educação.com.br</td>")
+                            document.write("</tr>")
+
+                            document.write("<tr>")
+                            document.write("<td>De:</td>")
+                            document.write("<td>beneficios@guarulhos.com.br</td>")
+                            document.write("</tr>")
+
+                            document.write("<tr>")
+                            document.write("<td>Data:</td>")
+                            document.write("<td>" + (datacompleta) +"</td>")
+                            document.write("</tr>")
+
+                            document.write("</table>")
+
+                            document.write("<br>")
+
+                            document.write("<p>Unidade: GUARULHOS CENTRO</p>")
+                            document.write("<p>Av. TIRADENTES N° 1386 CENTRO - Guarulhos - São Paulo</p>")
+                            document.write("<p>Site: <a style='text-decoration: none; color: black;' href='https://qualificaguarulhos.com.br/'>https://qualificaguarulhos.com.br/</a></p>")
+                    document.write("</div>")
+                    document.write("<img src='./bandeiraGuarulhos.png' alt='Bandeira de Guarulhos' >")
+                document.write("</div>")
+
+                document.write("<font size=5><b> ATENÇÃO COORDENADOR: O estudante acima foi reagendado para hoje, devido ao não comparecimento no dia 15/06/2024. Pedimos que nos envie este documento devidamente preenchido e assinado pelo responsável dentro do prazo maximo de 40min.</font><br><br>");
+
+                    document.write(" 	<li>PROGRAMA QUALIFICA GUARULHOS - EDUCAÇÃO PARA TODOS<br><br>")
+  document.write(" 	<li>O(a) aluno(a) acima está autorizado(a) a ser inscrito(a) no programa de BENEFÍCIOS EDUCACIONAIS e popularização do ensino profissional, por meio das contas de Benefícios Educativos, para inclusão digital e desenvolvimento profissional. Devido à participação positiva e relacional atual no Projeto de Vida e ao bom rendimento escolar, ficam aprovados os seguintes benefícios para o(a) aluno(a) acima citado(a):<br><br>")
+  
+  document.write(" 	<li>Projeto de Vida<br><br>")
+  document.write(" 	<li>É um componente curricular do Novo Ensino Médio ligado ao desenvolvimento de competências socioemocionais que permitem que o aluno construa sua própria trajetória profissional, acadêmica e pessoal com autonomia.<br><br>")
+
+    document.write("<font size=5><b> ETAPA 1 - Acompanhamento com Psicopedagoga Gratuito</font><br><br>");
+  document.write(" 	<li>Benefícios do Acompanhamento Psicopedagógico: Melhoria no Desempenho Acadêmico: Ajuda a melhorar o desempenho escolar e a enfrentar dificuldades específicas de aprendizagem, Assuntos abordados:Impactos do trauma infantil na vida adulta.,Dificuldade nos relacionamentos.,Problemas na regulação emocional.,Impacto no desenvolvimento cognitivo.,Comportamentos de risco.,Impactos físicos.,Como o trauma infantil pode afetar a longo prazo a vida adulta.,Anamnese e análise de TDAH ou outros.<br><br>")
+  document.write("<b><li>Avaliação Diagnostica</li><br>")
+  document.write("<b><li>Identificão de Dificuldades</li><br>")
+  document.write("<b><li>Elaboraçãoo de Plano de Intervenção</li><br>")
+  document.write("<b><li>Acompanhamento e Suporte</li><br>")
+  document.write("<b><li>Orientação para os Pais</li><br>")
+  document.write("<b><li>Desenvolvimento de Habilidades Sociais e Emocionais</li><br>") 
+  document.write("<font size=5><b>AUTORIZADO: SIM( ) NÃO( )</font><br><br>")
+  document.write(" 	<li>_______________________________________________________________________________________________________________<br><br>")
+  
+  
+  document.write("<font size=5><b> ETAPA 2- Análise de Perfil para Inscrição no Sistema Jovem Aprendiz</font><br><br>");
+  document.write(" 	<li>Realizar uma análise de perfil para a inscrição imediata ou futura no sistema Jovem Aprendiz, Meu Primeiro Emprego com seguimento a estágio.<br><br>")
+  
+  document.write("<font size=5><b>AUTORIZADO: SIM( ) NÃO( )</font><br><br>")
+  document.write(" 	<li>_______________________________________________________________________________________________________________<br><br>")
+  
+  
+  document.write("<font size=5><b> ETAPA 3 - Auxílio Estudantil</font><br><br>");
+  document.write(" 	<li>Estamos liberando o Auxílio Estudantil de R$250,00 por mês, com duração de 2 anos, para que o(a) aluno(a) possa realizar um curso de qualificação profissional.<br><br>")
+  document.write(" 	<li>BENEfÍCIOS DE INCENTIVO À QUALIFICAÇÃO PROFISSIONAL:Na escolha de realizar uma Qualificação Profissional nesta unidade escolar, estaremos realizando a isençãoo dos pagamentos de MATRÍCULA, TAXA DE INSCRIÇÃO, HORA AULA, REPOSIÇÃO DE AULA JUSTIFICADA, CERTIFICADO DE CONCLUSÃO, MATERIAL DIDÁTICO E APOSTILAS. Assim, o(a) estudante citado(a) acima fica livre da obrigatoriedade de tais pagamentos durante o período do curso escolhido. Poderá escolher estudar durante a semana ou aos sábados, desde que o horário escolhido seja fora do horário das aulas do curso regular.<br><br>")
+  document.write("<font size=5><b>AUTORIZADO: SIM( ) NÃO( )</font><br><br>")
+  
+  
+  
+  
+  
+  
+  
+  
+  document.write(" 	<li>_______________________________________________________________________________________________________________<br><br>")
+  document.write(" 	<li>_________________________________________________________________________<br><br>")
+  document.write(" 	<li>_________________________________________________________________________<br><br>")
+  document.write(" 	<li>_________________________________________________________________________<br><br>")
+  
+  
+  
+  
+  
+  
+  
+  document.write(" 	<li><b>ESCOLHA 2 CURSOS COMPLETOS COM Duração DE 2 ANOS CADA</font><br><br>")
+  document.write(" 	<li>( ) AUXILIAR DE NECROPSIA<br><br>")
+  document.write(" 	<li>( ) AUXILIAR E ATENDENTE DE FARMÁCIA<br><br>")
+  document.write(" 	<li>( ) AUXILIAR VETERINÁRIO PET SHOP<br><br>")
+  document.write(" 	<li>( ) CUIDADOR DE IDOSOS<br><br>")
+  document.write(" 	<li>( ) AUXILIAR ADMINISTRATIVO<br><br>")
+  document.write(" 	<li>( ) INGLÊS INTENSIVO<br><br>")
+  
+  
+  document.write(" 	<li><b>Escolha mais 03 cursos de especializações (cursos complementares de 2 meses a 6 meses cada):</b><br><br>")
+  document.write(" 	<li>( ) Inglês para Entrevista<br><br>")
+  document.write(" 	<li>( ) Marketing Pessoal<br><br>")
+  document.write(" 	<li>( ) Atendimento de Farmácia<br><br>")
+  document.write(" 	<li>( ) Atendimento Auxiliar Veterinário<br><br>")
+  document.write(" 	<li>( ) Elaboração e Apresentação Profissional<br><br>")
+  document.write(" 	<li>( ) Primeiros Socorros<br><br>")
+  document.write(" 	<li>( ) Atendimento ao Público)<br><br>")
+  document.write(" 	<li>( ) Recepção<br><br>")
+  document.write(" 	<li>( ) Telemarketing<br><br>")
+  document.write(" 	<li>( ) Comunicação e Oratória<br><br>")
+  document.write(" 	<li>( ) Inteligência Emocional<br><br>")
+  
+  document.write(" 	<li>_______________________________________________________________________________________________________________<br><br>")
+  
+  
+  document.write("Favor entregar este protocolo assinado com a aceitação ou recusa de bolsa para o (a) fiscal autorizada da <b>CENTRAL EDUCACIONAL</b>, dentro da data limite do benefício concedido.<br><br>")
+  document.write("Aceito o benefício:________________________________________________________________________________<br><br>")
+  document.write("NÃO Aceito o benefício. Justificativa____________________________________________________________________<br><br>")
+  document.write("     <center><font size=3> <b>*** BENEFICIO V&Aacute;LIDO SOMENTE AT&Eacute; O DIA " + (minha_data.getDate() < 10 ? "0" : "") + minha_data.getDate() + "/" + (minha_data.getMonth() + 1 < 10 ? "0" + (minha_data.getMonth() + 1) : minha_data.getMonth() + 1) + "/" + minha_data.getFullYear() + " ***</b></center></font></td>")
+
+  document.write("<h1>ATENÇÃO:</h1>")
+  document.write("<p>Apos o recebimento desse e-mail enviar a documentação em até 40 Quarenta minutos</p>")
+            document.write("</main>")
+        }
+    </script>
+</html>
