@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo QG</title>
+
+    <style>
+        body {
+            font-family: Verdana, Tahoma, sans-serif;
+        }
+
+        .bg-color {
+            background-color: #cddffd;
+        }
+
+        main {
+            width: 800px;
+            margin: auto;
+            font-family: Verdana;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .header {
+            text-align: center;
+            font-family: Verdana;
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 12px;            
+        }
+
+        li {
+            padding-bottom: 12px;
+        }
+
+        table {
+            font-size: medium;
+        }
+
+        .details-table {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: auto;
+        }
+        .details-table div {
+            flex-grow: 1;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        tr.spaceUnder>td {
+            padding-bottom: 0.6em;
+        }
+
+        @media print{
+            .no-print{
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body class='bg-color'>
+    <main style='margin: auto;'>
+        <h1 style='text-align: center; padding-top: 60px;'>
+            Protocolo - QUALIFICA GUARULHOS
+        </h1>
+
+        <form name='fmail' id='protocoloForm'>
+            <table style='margin-left: 25%;'>
+                <tr class='spaceUnder'>
+                    <td><label for='txtaluno'>Beneficiado</label></td>
+                    <td><input style='width: 150%;' name='txtaluno' type='text' required></td>
+                </tr>
+                <tr>
+                    <td><label for='txtproto'>Protocolo</label></td>
+                    <td><input name='txtproto' type='text' required></td>
+                </tr>
+            </table>
+            <button style='margin-left: 44%; margin-top: 1em;' type='submit'>Gerar Protocolo</button>
+        </form>
+    </main>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('input[name="txtaluno"]').focus();
+            });
+
+
+        document.getElementById('protocoloForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // Evita o envio padrão do formulário
+            criaDoc();
+        });
+
+        function imprimeJanela() {
+            window.print();
+        }
+
+        function criaForm() {
+            document.body.classList.add('bg-color')
+            document.body.innerHTML = `
+                <main style='margin: auto;'>
+        <h1 style='text-align: center; padding-top: 60px;'>
+            Protocolo - QUALIFICA GUARULHOS
+        </h1>
+
+        <form name='fmail' id='protocoloForm'>
+            <table style='margin-left: 25%;'>
+                <tr class='spaceUnder'>
+                    <td><label for='txtaluno'>Beneficiado</label></td>
+                    <td><input style='width: 150%;' name='txtaluno' type='text' required></td>
+                </tr>
+                <tr>
+                    <td><label for='txtproto'>Protocolo</label></td>
+                    <td><input name='txtproto' type='text' required></td>
+                </tr>
+            </table>
+            <button style='margin-left: 44%; margin-top: 1em;' type='submit'>Gerar Protocolo</button>
+        </form>
+    </main>
+            `
+
+            document.getElementById('protocoloForm').addEventListener('submit', function(e) {
+        e.preventDefault();  // Evita o envio padrão do formulário
+        criaDoc();
+    });
+    document.querySelector('input[name="txtaluno"]').focus();
+        }
+
+        function criaDoc() {
+            const aluno = document.fmail.txtaluno.value;
+            const proto = document.fmail.txtproto.value;
+            const minha_data = new Date();
+
+            const semana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+            const mes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+            const datacompleta = `${semana[minha_data.getDay()]}, ${(minha_data.getDate() < 10 ? "0" : "")}${minha_data.getDate()} de ${mes[minha_data.getMonth()]} de ${minha_data.getFullYear()} ${minha_data.getHours()}:${(minha_data.getMinutes() < 10 ? "0" : "")}${minha_data.getMinutes()}`;
+            
+            document.body.innerHTML = "<div id='output'></div>";
+
+            document.body.classList.remove('bg-color');
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                   <button class="no-print" onclick="imprimeJanela()">Imprimir</button>
+                   <button class="no-print" onclick="criaForm()">Novo Documento</button>
+    <main>
+        <p class="header">BENEFICIADO: ${aluno}</p>
+        <p class="header">SÉRIE: ${proto}</p>
+
+
+        <div class="details-table">
+            <div>
+                <table>
+                    <tr>
+                        <td>Assunto:</td>
+                        <td>Liberação do Benefício Educativo</td>
+                    </tr>
+                    <tr>
+                        <td>Para:</td>
+                        <td>Central@educacao.com.br</td>
+                    </tr>
+                    <tr>
+                        <td>De:</td>
+                        <td>beneficios@guarulhos.com.br</td>
+                    </tr>
+                    <tr>
+                        <td>Data:</td>
+                        <td>${datacompleta}</td>
+                    </tr>
+                </table>
+
+                <p>Unidade: GUARULHOS CENTRO</p>
+                <p>Av. TIRADENTES N° 1386 CENTRO - Guarulhos - São Paulo</p>
+                <p>Site: <a href="https://qualificaguarulhos.com.br/">https://qualificaguarulhos.com.br/</a></p>
+            </div>
+            <img src='./bandeiraGuarulhos.png' alt='Bandeira de Guarulhos'>
+        </div>
+
+
+        <h1>
+            ATENÇÃO COORDENADOR: O estudante acima foi reagendado para hoje, devido ao não comparecimento no dia 15/06/2024. Pedimos que nos envie este documento devidamente preenchido e assinado pelo responsável dentro do prazo maximo de 40min.
+        </h1>
+
+        <ul>
+            <li>
+                PROGRAMA QUALIFICA GUARULHOS - EDUCAÇÃO PARA TODOS
+            </li>
+            <li>
+                O(a) aluno(a) acima está autorizado(a) a ser inscrito(a) no programa de BENEFÍCIOS EDUCACIONAIS e popularização do ensino profissional, por meio das contas de Benefícios Educativos, para inclusão digital e desenvolvimento profissional. DEVIDO À PARTICIPAÇÃO POSITIVA E RELACIONAL ATUAL NO PROJETO DE VIDA E AO BOM RENDIMENTO ESCOLAR, ficam aprovados os seguintes benefícios para o(a) aluno(a) acima citado(a):
+            </li>
+            <li>
+                Projeto de Vida
+            </li>
+            <li>
+                É um componente curricular do Novo Ensino Médio ligado ao desenvolvimento de competências socioemocionais que permitem que o aluno construa sua própria trajetória profissional, acadêmica e pessoal com autonomia.
+            </li>
+        </ul>
+
+        <h1>
+            ETAPA 1 - Acompanhamento com Psicopedagoga Gratuito
+        </h1>
+
+        <ul>
+            <li>
+                Benefícios do Acompanhamento Psicopedagógico, melhoria no Desempenho Acadêmico: Ajuda a melhorar o desempenho escolar e a enfrentar dificuldades específicas de aprendizagem, assuntos abordados: Impactos do trauma infantil na vida adulta, dificuldade nos relacionamentos, problemas na regulação emocional, impacto no desenvolvimento cognitivo, comportamentos de risco, impactos físicos, como o trauma infantil pode afetar a longo prazo a vida adulta, Anamnese e análise de TDAH ou outros.
+
+            </li>
+            <li>
+                Avaliação Diagnostica
+            </li>
+            <li>
+                Identificão de Dificuldades
+            </li>
+            <li>
+                Elaboraçãoo de Plano de Intervenção
+            </li>
+            <li>
+                Acompanhamento e Suporte
+            </li>
+            <li>
+                Orientação para os Pais
+            </li>
+            <li>
+                Desenvolvimento de Habilidades Sociais e Emocionais
+            </li>
+        </ul>
+
+
+        <h1>
+            AUTORIZADO: SIM( ) NÃO( )
+        </h1>
+
+        <ul>
+            <li>
+                ________________________________________________________________________________________________________________________________
+            </li> 
+        </ul>
+
+
+        <h1>
+            ETAPA 2- Análise de Perfil para Inscrição no Sistema Jovem Aprendiz
+        </h1>
+
+        <ul>
+            <li>
+                Realizar uma análise de perfil para a inscrição imediata ou futura no sistema Jovem Aprendiz, Meu Primeiro Emprego com seguimento a estágio.
+            </li>
+        </ul>
+
+        <h1>
+            AUTORIZADO: SIM( ) NÃO( )
+        </h1>
+
+        <ul>
+            <li>
+                ________________________________________________________________________________________________________________________________
+            </li> 
+        </ul>
+
+
+        <h1>
+            ETAPA 3 - Auxílio Estudantil
+        </h1>
+
+        <ul>
+            <li>
+                Estamos liberando o Auxílio Estudantil de R$250,00 por mês, com duração de 2 anos, para que o(a) aluno(a) possa realizar um curso de qualificação profissional.
+            </li>
+            <li>
+                BENEfÍCIOS DE INCENTIVO À QUALIFICAÇÃO PROFISSIONAL:Na escolha de realizar uma Qualificação Profissional nesta unidade escolar, estaremos realizando a isenção dos pagamentos de MATRÍCULA, TAXA DE INSCRIÇÃO, HORA AULA, REPOSIÇÃO DE AULA JUSTIFICADA, CERTIFICADO DE CONCLUSÃO, MATERIAL DIDÁTICO E APOSTILAS. Assim, o(a) estudante citado(a) acima fica livre da obrigatoriedade de tais pagamentos durante o período do curso escolhido. Poderá escolher estudar durante a semana ou aos sábados, desde que o horário escolhido seja fora do horário das aulas do curso regular.
+            </li>
+        </ul>
+
+        <h1>
+            AUTORIZADO: SIM( ) NÃO( )
+        </h1>
+
+        <ul>
+                <li>
+                    ________________________________________________________________________________________________________________________________
+                </li> 
+
+
+
+            <li>
+                ESCOLHA 2 CURSOS COMPLETOS COM DURAÇÃO DE 2 ANOS CADA
+            </li>
+
+            <li>
+                ( )AUXILIAR DE NECROPSIA
+            </li>
+            <li>
+                ( ) AUXILIAR E ATENDENTE DE FARMÁCIA
+            </li>
+            <li>
+                ( ) AUXILIAR VETERINÁRIO PET SHOP
+            </li>
+            <li>
+                ( ) CUIDADOR DE IDOSOS
+            </li>
+            <li>
+                ( ) AUXILIAR ADMINISTRATIVO
+            </li>
+            <li>
+                ( ) INGLÊS INTENSIVO
+            </li>
+            <li>
+                ( ) REFORÇO ESCOLAR INFANTIL
+            </li>
+
+
+            <li>
+                Escolha mais 03 cursos de especializações (cursos complementares de 2 meses a 6 meses cada):
+            </li>
+            <li>
+                ( ) Inglês para Entrevista
+            </li>
+            <li>
+                ( ) Marketing Pessoal
+            </li>
+            <li>
+                ( ) Atendimento de Farmácia
+            </li>
+            <li>
+                ( ) Atendimento Auxiliar Veterinário
+            </li>
+            <li>
+                ( ) Elaboração e Apresentação Profissional
+            </li>
+            <li>
+                ( ) Primeiros Socorros
+            </li>
+            <li>
+                ( ) Atendimento ao Público
+            </li>
+            <li>
+                ( ) Recepção
+            </li>
+            <li>
+                ( ) Telemarketing
+            </li>
+            <li>
+                ( ) Comunicação e Oratória
+            </li>
+            <li>
+                ( ) Inteligência Emocional
+            </li>
+                <li>
+                    ________________________________________________________________________________________________________________________________
+                </li> 
+        </ul>
+
+        <p>
+            Favor entregar este protocolo assinado com a aceitação ou recusa de bolsa para o (a) fiscal autorizada da CENTRAL EDUCACIONAL, dentro da data limite do benefício concedido.
+        </p>
+
+        <p>
+            Aceito o benefício:_______________________________________________________________________________________________________
+        </p>
+        <p>
+            NÃO aceito o benefício. Justificativa:________________________________________________________________________________________
+        </p>
+
+
+        <h1 style='text-align: center; font-size: 16px;'>
+            *** BENEFÍCIO VÁLIDO SOMENTE ATÉ O DIA 05/09/2024 ***
+        </h1>
+
+        <h1>
+            ATENÇÃO:
+        </h1>
+
+        <p>
+            Após o recebimento desse e-mail enviar a documentação em até quarenta (40) minutos
+        </p>
+    </main>
+            `;
+        }
+
+    </script>
+</body>
+</html>
